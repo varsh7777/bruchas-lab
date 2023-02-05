@@ -8,7 +8,7 @@ from sklearn import metrics
 # reading csv of state behavior in for analysis
 data = pd.read_csv("runninng wheel.csv")
 
-# separating x values from labels
+# separating feature values from labels, displaying them
 x = data.iloc[:, [2, 3, 4]].values
 print(x)
 y = data.iloc[:, 1].values
@@ -23,8 +23,10 @@ classifier.fit(x_train, y_train)
 
 y_pred = classifier.predict(x_test)
 
+# accuracy of classifier
 print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
 
+# importance of each feature
 feature_imp = pd.Series(classifier.feature_importances_,
                         index=['Time on wheel', 'latency to run',
                                'Frequency']).sort_values(ascending=False)
