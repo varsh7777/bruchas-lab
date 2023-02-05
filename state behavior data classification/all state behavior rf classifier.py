@@ -1,10 +1,12 @@
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
-# import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
 
 # reading csv of state behavior in for analysis
 data = pd.read_csv("C:/Users/sriva/Downloads/all state behavior.csv")
@@ -17,7 +19,8 @@ print(y)
 
 x = StandardScaler().fit_transform(x)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.5, stratify=y)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.5,
+                                                    stratify=y)
 
 
 classifier = RandomForestClassifier(n_estimators=1000)
@@ -53,6 +56,28 @@ print(feature_imp)
 matrix = confusion_matrix(y_test, y_pred)
 
 print(matrix)
+
+# confusion matrix visualization pulled from:
+# https://medium.com/analytics-vidhya/evaluating-a-random-forest-model-9d165595ad56
+
+matrix = matrix.astype('float') / matrix.sum(axis=1)[:, np.newaxis]
+
+# Build the plot
+plt.figure(figsize=(16, 7))
+sns.set(font_scale=1.4)
+sns.heatmap(matrix, annot=True, annot_kws={'size': 10},
+            cmap=plt.cm.Greens, linewidths=0.2)
+
+# Add labels to the plot
+class_names = ['Control', 'Exercise', 'Isolation']
+tick_marks = np.arange(len(class_names))
+tick_marks2 = tick_marks + 0.5
+plt.xticks(tick_marks, class_names, rotation=25)
+plt.yticks(tick_marks2, class_names, rotation=0)
+plt.xlabel('Predicted label')
+plt.ylabel('True label')
+plt.title('Confusion Matrix for Random Forest Model')
+plt.show()
 
 """
 Accuracy: 0.6470588235294118
