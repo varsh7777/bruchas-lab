@@ -32,3 +32,12 @@ feature_imp = pd.Series(classifier.feature_importances_,
                                'Frequency']).sort_values(ascending=False)
 
 print(feature_imp)
+
+"""
+Accuracy: 0.4117647058823529
+
+Feature importance:
+Time on wheel     0.391670
+latency to run    0.311077
+Frequency         0.297252
+"""
