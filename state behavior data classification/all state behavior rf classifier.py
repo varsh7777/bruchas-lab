@@ -1,14 +1,13 @@
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 from sklearn.model_selection import train_test_split
-# from sklearn.preprocessing import StandardScaler
-# accuracy tended to go up when data was scaled, but not too much?
-# there was also more variation; from 0.5 to 0.7 for accuracy
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
 # import numpy as np
 
 # reading csv of state behavior in for analysis
-data = pd.read_csv("all state behavior.csv")
+data = pd.read_csv("C:/Users/sriva/Downloads/all state behavior.csv")
 
 # separating feature values from labels, displaying them
 x = data.iloc[:, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]].values
@@ -16,9 +15,12 @@ print(x)
 y = data.iloc[:, 1].values
 print(y)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.5)
+x = StandardScaler().fit_transform(x)
 
-classifier = RandomForestClassifier(n_estimators=200)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.5, stratify=y)
+
+
+classifier = RandomForestClassifier(n_estimators=1000)
 
 classifier.fit(x_train, y_train)
 
@@ -47,6 +49,10 @@ feature_imp = pd.Series(classifier.feature_importances_,
                                'Number of USVs']).sort_values(ascending=False)
 
 print(feature_imp)
+
+matrix = confusion_matrix(y_test, y_pred)
+
+print(matrix)
 
 """
 Accuracy: 0.6470588235294118
