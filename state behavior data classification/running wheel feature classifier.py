@@ -6,7 +6,7 @@ from sklearn import metrics
 # import numpy as np
 
 # reading csv of state behavior in for analysis
-data = pd.read_csv("C:/Users/sriva/Downloads/state behavior data 1.csv")
+data = pd.read_csv("runninng wheel.csv")
 
 # separating x values from labels
 x = data.iloc[:, [2, 3, 4]].values
