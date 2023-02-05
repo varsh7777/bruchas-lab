@@ -6,7 +6,7 @@ from sklearn import metrics
 # import numpy as np
 
 # reading csv of state behavior in for analysis
-data = pd.read_csv("C:/Users/sriva/Downloads/pain assay.csv")
+data = pd.read_csv("pain assay.csv")
 
 # separating feature values from labels, displaying them
 x = data.iloc[:, [2, 3, 4]].values
