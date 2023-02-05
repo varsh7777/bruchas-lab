@@ -23,7 +23,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.5,
                                                     stratify=y)
 
 
-classifier = RandomForestClassifier(n_estimators=1000)
+classifier = RandomForestClassifier(n_estimators=200)
 
 classifier.fit(x_train, y_train)
 
@@ -83,20 +83,20 @@ plt.show()
 Accuracy: 0.6470588235294118
 
 Feature importance:
-Time on wheel              0.184683
-1hr food consumed          0.118636
-Latency to lick            0.109465
-latency to run             0.083017
-Frequency to zone          0.069827
-Time to flick              0.061980
-Total distance travel      0.054356
-Von frey                   0.053583
-Time in light              0.042146
-Frequency to light zone    0.041263
-Number of USVs             0.033195
-time spend in food zone    0.031931
-Total food eaten           0.030881
-Total distance travel      0.029309
-Velocity                   0.028548
-Frequency                  0.027180
+Time on wheel                        0.140167
+1hr food consumed                    0.123356
+Number of USVs                       0.069465
+Time to flick                        0.068875
+Total distance travel (foraging)     0.064132
+Time in light                        0.063876
+Total distance travel (light box)    0.063837
+latency to run                       0.057798
+Frequency                            0.056063
+Frequency to light zone              0.054742
+time spend in food zone              0.050904
+Frequency to zone                    0.042827
+Total food eaten                     0.041394
+Von frey                             0.038792
+Velocity                             0.034445
+Latency to lick                      0.029327
 """
