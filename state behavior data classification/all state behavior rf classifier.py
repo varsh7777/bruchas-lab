@@ -9,7 +9,7 @@ from sklearn import metrics
 data = pd.read_csv("all state behavior.csv")
 
 # separating feature values from labels, displaying them
-x = data.iloc[:, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]].values
+x = data.iloc[:, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]].values
 print(x)
 y = data.iloc[:, 1].values
 print(y)
@@ -31,7 +31,6 @@ feature_imp = pd.Series(classifier.feature_importances_,
                                'latency to run',
                                'Frequency',
                                '1hr food consumed',
-                               '1hr food consumed',
                                'Total food eaten',
                                'Total distance travel',
                                'time spend in food zone',
@@ -51,21 +50,20 @@ print(feature_imp)
 Accuracy: 0.6470588235294118
 
 Feature importance:
-latency to run             0.136387
-Time on wheel              0.110417
-Frequency to light zone    0.091203
-1hr food consumed          0.085330
-1hr food consumed          0.085076
-Latency to lick            0.080952
-Number of USVs             0.066780
-Von frey                   0.053942
-Time to flick              0.050988
-Total distance travel      0.047832
-time spend in food zone    0.038627
-Frequency to zone          0.037343
-Total distance travel      0.031416
-Frequency                  0.029338
-Total food eaten           0.022422
-Velocity                   0.019741
-Time in light              0.012206
+Time on wheel              0.184683
+1hr food consumed          0.118636
+Latency to lick            0.109465
+latency to run             0.083017
+Frequency to zone          0.069827
+Time to flick              0.061980
+Total distance travel      0.054356
+Von frey                   0.053583
+Time in light              0.042146
+Frequency to light zone    0.041263
+Number of USVs             0.033195
+time spend in food zone    0.031931
+Total food eaten           0.030881
+Total distance travel      0.029309
+Velocity                   0.028548
+Frequency                  0.027180
 """
