@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 # from sklearn.preprocessing import StandardScaler
 # accuracy tended to go up when data was scaled, but not too much?
+# there was also more variation; from 0.5 to 0.7 for accuracy
 from sklearn import metrics
 # import numpy as np
 
