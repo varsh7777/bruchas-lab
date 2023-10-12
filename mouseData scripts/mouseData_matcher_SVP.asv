@@ -1,0 +1,53 @@
+%% This file returns a matched data struct
+%% please load in your mouseData and run the compiler on it before using this file
+%% you will also need to load in your cell_registered_struct, which should result from running cellReg on the same 
+%% mice/sessions as you have in your mouseData
+
+map = cell_registered_struct.cell_to_index_map; % our copy
+matchedMouseData = mouseData; % this will get changed
+ogMouseData = mouseData; % this copy is our reference
+
+num_sessions_to_align = input('How many sessions do you have to align? '); % 
+
+map_height = length(map); % num of total cells in map
+
+exists_map = [map_height]; % a map of whether or not the row exists in all sessions
+
+num_cells = 0; % num of cells that exist in both
+
+% determines if all cells exist in that row
+for i = 1:map_height
+    exists = true;
+    for j = 1:num_sessions_to_align
+        exists = exists && (map(i, j) ~= 0);
+    end
+    if (exists == true)
+        exists_map(i) = 1;
+        num_cells = num_cells + 1;
+    else
+        exists_map(i) = 0;
+    end
+end
+
+for k = 1:(num_sessions_to_align)
+    normTracesLength = length(ogMouseData(k).ca.allNormTraces);
+    matchedMouseData(k).ca.allNormTraces = zeros(num_cells, normTracesLength);
+    matchedMouseData(k).ca.caData = struct('rawTrace', {}, 'deconTrace', {}, 'eventTrace', {}, 'normalizedTraceZ', {}, 'normalizedTrace', {}, 'Coor', {});
+end
+
+for a = 1:(num_sessions_to_align)
+    start_index = 1;
+    for b = 1:(num_cells)
+        if (exists_map(b))
+            index = cell_registered_struct.cell_to_index_map(b, a);
+            disp(index)
+            matchedMouseData(a).ca.allNormTraces(b) = ogMouseData(a).ca.allNormTraces(index);
+            matchedMouseData(a).ca.caData(b) = ogMouseData(a).ca.caData(index);
+            start_index = start_index + 1;
+        end
+    end
+end
+
+% mouseData = matchedMouseData;
+
+clear a b caDataLength exists exists_map i index j k map map_height normTracesLength num_cells num_sessions_to_align ogMouseData start_index
